@@ -28,7 +28,7 @@ const EditProgram = () => {
 
   const fetchProgram = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/programs/${id}`);
+      const response = await fetch(`/api/programs/${id}`);
       const data = await response.json();
 
       if (data.success) {
@@ -44,7 +44,7 @@ const EditProgram = () => {
           image: null, // Don't set file object, just keep track of existing image
         });
         if (program.image) {
-          setImagePreview(`http://localhost:4000${program.image}`);
+          setImagePreview(`${program.image}`);
         }
       } else {
         alert("Failed to fetch program details");
@@ -109,7 +109,7 @@ const EditProgram = () => {
         data.append("image", formData.image);
       }
 
-      const response = await fetch(`http://localhost:4000/api/programs/${id}`, {
+      const response = await fetch(`/api/programs/${id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -16,7 +16,7 @@ const ManagePrograms = () => {
   const fetchPrograms = async () => {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/programs/admin/all",
+        "/api/programs/admin/all",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -38,7 +38,7 @@ const ManagePrograms = () => {
     if (window.confirm("Are you sure you want to delete this program?")) {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/programs/${id}`,
+          `/api/programs/${id}`,
           {
             method: "DELETE",
             headers: {
@@ -110,7 +110,7 @@ const ManagePrograms = () => {
                     <div className="flex items-center flex-1 min-w-0">
                       <div className="flex-shrink-0 h-16 w-16 rounded-md overflow-hidden mr-4">
                         <LazyImage
-                          src={`http://localhost:4000${program.image}`}
+                          src={`${program.image}`}
                           alt={program.title}
                           className="h-16 w-16 object-cover"
                         />

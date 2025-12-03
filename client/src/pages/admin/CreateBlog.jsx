@@ -34,14 +34,14 @@ const CreateBlog = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:4000/api/upload",
+        "/api/upload",
         uploadData,
         config
       );
 
       setFormData((prev) => ({
         ...prev,
-        image: `http://localhost:4000${data.image}`,
+        image: `${data.image}`,
       }));
       setUploading(false);
     } catch (error) {
@@ -66,7 +66,7 @@ const CreateBlog = () => {
     try {
       const tagsArray = formData.tags.split(",").map((tag) => tag.trim());
 
-      const response = await fetch("http://localhost:4000/api/blogs", {
+      const response = await fetch("/api/blogs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

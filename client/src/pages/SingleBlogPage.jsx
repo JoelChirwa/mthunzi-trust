@@ -14,7 +14,7 @@ const SingleBlogPage = () => {
 
   const fetchPost = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/blogs/${slug}`);
+      const response = await fetch(`/api/blogs/${slug}`);
       const data = await response.json();
       if (response.ok) {
         setPost(data);

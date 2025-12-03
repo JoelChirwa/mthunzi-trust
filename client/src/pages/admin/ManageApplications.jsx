@@ -11,7 +11,7 @@ const ManageApplications = () => {
   const fetchApplications = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:4000/api/applications', {
+      const res = await fetch('/api/applications', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -27,7 +27,7 @@ const ManageApplications = () => {
     if (!confirm('Delete this application?')) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:4000/api/applications/${id}`, {
+      const res = await fetch(`/api/applications/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });

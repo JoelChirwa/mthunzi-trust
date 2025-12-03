@@ -42,7 +42,7 @@ const CreateVacancy = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:4000/api/vacancies", {
+      const response = await fetch("/api/vacancies", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

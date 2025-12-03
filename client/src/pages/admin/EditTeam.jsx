@@ -40,14 +40,14 @@ const EditTeam = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:4000/api/upload",
+        "/api/upload",
         uploadData,
         config
       );
 
       setFormData((prev) => ({
         ...prev,
-        image: `http://localhost:4000${data.image}`,
+        image: `${data.image}`,
       }));
       setUploading(false);
     } catch (error) {
@@ -62,7 +62,7 @@ const EditTeam = () => {
 
   const fetchTeamMember = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/team/${id}`, {
+      const response = await fetch(`/api/team/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -123,7 +123,7 @@ const EditTeam = () => {
         isActive: formData.isActive,
       };
 
-      const response = await fetch(`http://localhost:4000/api/team/${id}`, {
+      const response = await fetch(`/api/team/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

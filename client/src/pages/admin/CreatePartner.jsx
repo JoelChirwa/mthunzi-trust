@@ -35,14 +35,14 @@ const CreatePartner = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:4000/api/upload",
+        "/api/upload",
         uploadData,
         config
       );
 
       setFormData((prev) => ({
         ...prev,
-        logo: `http://localhost:4000${data.image}`,
+        logo: `${data.image}`,
       }));
       setUploading(false);
     } catch (error) {
@@ -65,7 +65,7 @@ const CreatePartner = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:4000/api/partners", {
+      const response = await fetch("/api/partners", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

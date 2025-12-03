@@ -12,7 +12,7 @@ const VacanciesPage = () => {
 
   const fetchVacancies = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/vacancies");
+      const response = await fetch("/api/vacancies");
       const data = await response.json();
       if (data.vacancies) {
         // Filter only active vacancies

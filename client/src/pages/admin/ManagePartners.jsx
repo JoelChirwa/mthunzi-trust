@@ -14,7 +14,7 @@ const ManagePartners = () => {
 
   const fetchPartners = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/partners", {
+      const response = await fetch("/api/partners", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,7 +34,7 @@ const ManagePartners = () => {
     if (window.confirm("Are you sure you want to remove this partner?")) {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/partners/${id}`,
+          `/api/partners/${id}`,
           {
             method: "DELETE",
             headers: {

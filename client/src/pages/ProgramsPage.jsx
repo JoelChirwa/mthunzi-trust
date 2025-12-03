@@ -15,7 +15,7 @@ const ProgramsPage = () => {
 
   const fetchPrograms = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/programs");
+      const response = await fetch("/api/programs");
       const data = await response.json();
       if (data.success) {
         setPrograms(data.programs);
@@ -90,7 +90,7 @@ const ProgramsPage = () => {
                         className={`absolute inset-0 bg-gradient-to-tr ${program.color} opacity-20 group-hover:opacity-10 transition-opacity duration-500`}
                       ></div>
                       <LazyImage
-                        src={`http://localhost:4000${program.image}`}
+                        src={`${program.image}`}
                         alt={program.title}
                         className="w-full h-[400px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                       />

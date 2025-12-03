@@ -14,7 +14,7 @@ const ManageBlogs = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/blogs", {
+      const response = await fetch("/api/blogs", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -33,7 +33,7 @@ const ManageBlogs = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this blog post?")) {
       try {
-        const response = await fetch(`http://localhost:4000/api/blogs/${id}`, {
+        const response = await fetch(`/api/blogs/${id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,

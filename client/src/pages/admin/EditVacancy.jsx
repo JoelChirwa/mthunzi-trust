@@ -26,7 +26,7 @@ const EditVacancy = () => {
 
   const fetchVacancy = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/vacancies/${id}`);
+      const response = await fetch(`/api/vacancies/${id}`);
       const data = await response.json();
 
       if (response.ok) {
@@ -73,7 +73,7 @@ const EditVacancy = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/vacancies/${id}`,
+        `/api/vacancies/${id}`,
         {
           method: "PUT",
           headers: {

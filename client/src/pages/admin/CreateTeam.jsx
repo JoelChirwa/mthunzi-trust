@@ -38,14 +38,14 @@ const CreateTeam = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:4000/api/upload",
+        "/api/upload",
         uploadData,
         config
       );
 
       setFormData((prev) => ({
         ...prev,
-        image: `http://localhost:4000${data.image}`,
+        image: `${data.image}`,
       }));
       setUploading(false);
     } catch (error) {
@@ -84,7 +84,7 @@ const CreateTeam = () => {
         isActive: formData.isActive,
       };
 
-      const response = await fetch("http://localhost:4000/api/team", {
+      const response = await fetch("/api/team", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

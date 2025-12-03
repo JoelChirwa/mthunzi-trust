@@ -71,7 +71,7 @@ const CreateProgram = () => {
         data.append("image", formData.image);
       }
 
-      const response = await fetch("http://localhost:4000/api/programs", {
+      const response = await fetch("/api/programs", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

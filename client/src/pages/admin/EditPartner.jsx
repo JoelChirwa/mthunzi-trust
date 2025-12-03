@@ -37,14 +37,14 @@ const EditPartner = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:4000/api/upload",
+        "/api/upload",
         uploadData,
         config
       );
 
       setFormData((prev) => ({
         ...prev,
-        logo: `http://localhost:4000${data.image}`,
+        logo: `${data.image}`,
       }));
       setUploading(false);
     } catch (error) {
@@ -59,7 +59,7 @@ const EditPartner = () => {
 
   const fetchPartner = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/partners/${id}`, {
+      const response = await fetch(`/api/partners/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -101,7 +101,7 @@ const EditPartner = () => {
     setError("");
 
     try {
-      const response = await fetch(`http://localhost:4000/api/partners/${id}`, {
+      const response = await fetch(`/api/partners/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

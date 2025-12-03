@@ -14,7 +14,7 @@ const ManageTeam = () => {
 
   const fetchTeamMembers = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/team", {
+      const response = await fetch("/api/team", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -33,7 +33,7 @@ const ManageTeam = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to remove this team member?")) {
       try {
-        const response = await fetch(`http://localhost:4000/api/team/${id}`, {
+        const response = await fetch(`/api/team/${id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,

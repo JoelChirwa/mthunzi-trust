@@ -30,7 +30,7 @@ const AboutPage = () => {
 
   const fetchTeamMembers = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/team");
+      const response = await fetch("/api/team");
       const data = await response.json();
       if (data.teamMembers) {
         // Only show active team members

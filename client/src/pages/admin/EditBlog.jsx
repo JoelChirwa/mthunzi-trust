@@ -36,14 +36,14 @@ const EditBlog = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:4000/api/upload",
+        "/api/upload",
         uploadData,
         config
       );
 
       setFormData((prev) => ({
         ...prev,
-        image: `http://localhost:4000${data.image}`,
+        image: `${data.image}`,
       }));
       setUploading(false);
     } catch (error) {
@@ -58,7 +58,7 @@ const EditBlog = () => {
 
   const fetchBlog = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/blogs/id/${id}`, {
+      const response = await fetch(`/api/blogs/id/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -101,7 +101,7 @@ const EditBlog = () => {
     try {
       const tagsArray = formData.tags.split(",").map((tag) => tag.trim());
 
-      const response = await fetch(`http://localhost:4000/api/blogs/${id}`, {
+      const response = await fetch(`/api/blogs/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

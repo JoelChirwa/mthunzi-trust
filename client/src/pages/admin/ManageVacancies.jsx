@@ -14,7 +14,7 @@ const ManageVacancies = () => {
 
   const fetchVacancies = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/vacancies");
+      const response = await fetch("/api/vacancies");
       const data = await response.json();
       if (data.vacancies) {
         setVacancies(data.vacancies);
@@ -30,7 +30,7 @@ const ManageVacancies = () => {
     if (window.confirm("Are you sure you want to remove this vacancy?")) {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/vacancies/${id}`,
+          `/api/vacancies/${id}`,
           {
             method: "DELETE",
             headers: {
