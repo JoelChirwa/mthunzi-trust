@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "build": "npm install --prefix server && npm install --prefix client && npm run build --prefix client",
-  "start": "npm run start --prefix server" 
-  },
+  "preinstall": "cd client && npm install",
+  "build": "cd client && npm run build",
+  "start": "node server/server.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC"
