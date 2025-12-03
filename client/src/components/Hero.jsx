@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LazyImage from "./LazyImage";
-import hero1 from "../assets/hero-1.webp";
-import hero2 from "../assets/hero-2.jpg";
+import hero1 from "../assets/hero-1.jpg";
+import hero2 from "../assets/hero-2.webp";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
