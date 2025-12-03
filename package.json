@@ -1,13 +1,26 @@
 {
-  "name": "mthunzi-trust-web",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.0.0",
+    "mthunzi-trust-web": "file:..",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.11",
+    "path": "^0.12.7"
+  },
+  "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
-  "preinstall": "cd client && npm install",
-  "build": "cd client && npm run build",
-  "start": "node server/server.js"
-},
+    "dev": "node --watch server/server.js",
+    "start": "node server/server.js",
+    "seed:admin": "node scripts/seedAdmin.js",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
