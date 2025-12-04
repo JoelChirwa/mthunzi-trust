@@ -15,13 +15,11 @@
     "axios": "^1.13.2",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.555.0",
-    "mthunzi-trust-web": "file:..",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-is": "^19.2.0",
     "react-router-dom": "^7.9.6",
     "recharts": "^3.5.1",
-    "server": "file:..",
     "tailwindcss": "^4.1.17",
     "vite": "^7.2.4"
   },

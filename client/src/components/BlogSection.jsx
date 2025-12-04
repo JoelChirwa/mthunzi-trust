@@ -12,7 +12,7 @@ const BlogSection = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/blogs?limit=3");
+      const response = await fetch("/api/blogs?limit=3");
       const data = await response.json();
       if (data.blogs) {
         // Only get published blogs and limit to 3

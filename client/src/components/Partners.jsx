@@ -20,7 +20,7 @@ const Partners = () => {
 
   const fetchPartners = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/partners");
+      const response = await fetch("/api/partners");
       const data = await response.json();
 
       if (data.partners) {
