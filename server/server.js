@@ -65,13 +65,12 @@ app.use('/api/subscribers', subscriberRoutes);
 app.use('/api/stats', statsRoutes);
 app.use('/api/upload', uploadRoutes);
 
-// Serve static files from React build (production)
-if (process.env.NODE_ENV === 'production') {
+// make the app ready for deployment
+if (ENV.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')));
-  
-  // Catch-all route for React SPA - Express 5 uses '*' instead of '/*'
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+
+  app.get('/{*any}', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client', 'dist', 'index.html'));
   });
 }
 

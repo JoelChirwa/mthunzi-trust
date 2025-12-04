@@ -1,4 +1,9 @@
 import nodemailer from 'nodemailer';
+import sendgrid from '@sendgrid/mail';
+import dotenv from 'dotenv';
+dotenv.config();
+
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 const emailConfig = {
   host: process.env.EMAIL_HOST,
