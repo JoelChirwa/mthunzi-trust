@@ -1,48 +1,44 @@
-import path from 'path';
 import express from 'express';
 import multer from 'multer';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename(req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-    );
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Configure Cloudinary storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'mthunzi-trust', // Folder name in Cloudinary
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+    transformation: [{ width: 2000, height: 2000, crop: 'limit' }], // Max dimensions
   },
 });
 
-function checkFileType(file, cb) {
-  const filetypes = /jpg|jpeg|png|webp/;
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = filetypes.test(file.mimetype);
+const upload = multer({ storage });
 
-  if (extname && mimetype) {
-    return cb(null, true);
-  } else {
-    cb('Images only!');
-  }
-}
-
-const upload = multer({
-  storage,
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  },
-});
-
+// Upload endpoint
 router.post('/', upload.single('image'), (req, res) => {
-  // Return path in format: /uploads/filename.jpg
-  const imagePath = `/uploads/${req.file.filename}`;
-  console.log(`✓ Image uploaded: ${imagePath}`);
-  
+  if (!req.file) {
+    return res.status(400).send({
+      message: 'No file uploaded',
+    });
+  }
+
+  // Cloudinary automatically uploads and returns the URL
+  const imageUrl = req.file.path; // This is the Cloudinary URL
+  console.log(`✓ Image uploaded to Cloudinary: ${imageUrl}`);
+
   res.send({
-    message: 'Image uploaded',
-    image: imagePath,
+    message: 'Image uploaded successfully',
+    image: imageUrl,
   });
 });
 

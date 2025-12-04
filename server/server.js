@@ -3,7 +3,6 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { connectDB } from './config/db.js';
-import fs from 'fs';
 
 // Import routes
 import authRoutes from './routes/authRoutes.js';
@@ -29,28 +28,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve uploaded files
-const uploadsDir = path.join(__dirname, 'uploads');
-
-// Debug logging for uploads directory
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
-  console.log(`✓ Created uploads directory at: ${uploadsDir}`);
-} else {
-  console.log(`✓ Uploads directory exists at: ${uploadsDir}`);
-  try {
-    const files = fs.readdirSync(uploadsDir);
-    console.log(`✓ Found ${files.length} files in uploads directory`);
-  } catch (err) {
-    console.error('❌ Error reading uploads directory:', err);
-  }
-}
-
-// Serve uploads with logging
-app.use('/uploads', (req, res, next) => {
-  console.log(`📤 Request for upload: ${req.url}`);
-  next();
-}, express.static(uploadsDir));
+// Note: Images are now stored in Cloudinary, not local file system
+// No need to serve local uploads directory
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -65,12 +44,13 @@ app.use('/api/subscribers', subscriberRoutes);
 app.use('/api/stats', statsRoutes);
 app.use('/api/upload', uploadRoutes);
 
-// make the app ready for deployment
+// Serve static files from React build (production)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')));
-
-  app.get('/{*any}', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client', 'dist', 'index.html'));
+  
+  // Catch-all route for React SPA - Express 5 uses '*' instead of '/*'
+  app.get('/{*any}', (req, res)=> {
+    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
   });
 }
 
@@ -90,5 +70,6 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV}`);
+  console.log(`✓ Using Cloudinary for image storage`);
   connectDB();
 });
