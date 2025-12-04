@@ -3,6 +3,7 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { connectDB } from './config/db.js';
+import fs from 'fs';
 
 // Import routes
 import authRoutes from './routes/authRoutes.js';
@@ -29,14 +30,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve uploaded files
-// Ensure uploads directory exists
-import fs from 'fs';
 const uploadsDir = path.join(__dirname, 'uploads');
+
+// Debug logging for uploads directory
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir);
+  console.log(`✓ Created uploads directory at: ${uploadsDir}`);
+} else {
+  console.log(`✓ Uploads directory exists at: ${uploadsDir}`);
+  try {
+    const files = fs.readdirSync(uploadsDir);
+    console.log(`✓ Found ${files.length} files in uploads directory`);
+  } catch (err) {
+    console.error('❌ Error reading uploads directory:', err);
+  }
 }
 
-app.use('/uploads', express.static(uploadsDir));
+// Serve uploads with logging
+app.use('/uploads', (req, res, next) => {
+  console.log(`📤 Request for upload: ${req.url}`);
+  next();
+}, express.static(uploadsDir));
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -55,7 +69,7 @@ app.use('/api/upload', uploadRoutes);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')));
   
-  app.get('/{*any}', (req, res) => {
+  app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
   });
 }
