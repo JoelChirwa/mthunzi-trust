@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -20,7 +21,6 @@
     "start": "node server/server.js",
     "seed:admin": "node scripts/seedAdmin.js",
     "build": "npm ci && npm ci --prefix client && npm run build --prefix client"
-
   },
   "keywords": [],
   "author": "",
